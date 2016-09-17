@@ -1,0 +1,4 @@
+cpputest/
+lib/
+objs/
+*_tests
