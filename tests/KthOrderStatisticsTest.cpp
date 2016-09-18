@@ -1,7 +1,7 @@
 #include "CppUTest/TestHarness.h"
 #include "KthOrderStatistics.h"
-
-using namespace std;
+#include <numeric> 
+#include <algorithm>
 
 TEST_GROUP(kthOrderStatisticsTest)
 {
@@ -17,10 +17,15 @@ TEST_GROUP(kthOrderStatisticsTest)
     }
 };
 
-TEST(kthOrderStatisticsTest, testThatTestsWorks)
+TEST(kthOrderStatisticsTest, testQuickselectReturnsKthOrderStatistics)
 {
 	
 	KthOrderStatistics kthOrderStatistics;
-	CHECK_EQUAL(true, kthOrderStatistics.getTrue());
+	vector<int> v(100);
+	iota (v.begin(), v.end(), 1);
+	for(int i=1; i<=(int)v.size(); i++){
+		random_shuffle(v.begin(), v.end());
+		CHECK_EQUAL(i, kthOrderStatistics.quickselect(v,i));
+	}
 
 }
