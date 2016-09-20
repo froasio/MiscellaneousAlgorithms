@@ -17,7 +17,7 @@ TEST_GROUP(kthOrderStatisticsTest)
     }
 };
 
-TEST(kthOrderStatisticsTest, testQuickselectReturnsKthOrderStatistics)
+TEST(kthOrderStatisticsTest, testRandomInputs)
 {
 	
 	KthOrderStatistics kthOrderStatistics;
@@ -25,20 +25,9 @@ TEST(kthOrderStatisticsTest, testQuickselectReturnsKthOrderStatistics)
 	iota (v.begin(), v.end(), 0);
 	for(int i=0; i<(int)v.size(); i++){
 		random_shuffle(v.begin(), v.end());
-		CHECK_EQUAL(i, kthOrderStatistics.quickselect(v,i));
-	}
-
-}
-
-TEST(kthOrderStatisticsTest, testKheapsortReturnsKthOrderStatistics)
-{
-	
-	KthOrderStatistics kthOrderStatistics;
-	vector<int> v(100);
-	iota (v.begin(), v.end(), 0);
-	for(int i=0; i<(int)v.size(); i++){
-		random_shuffle(v.begin(), v.end());
+		CHECK_EQUAL(i, kthOrderStatistics.orderselect(v,i));
 		CHECK_EQUAL(i, kthOrderStatistics.kheapsort(v,i));
+		CHECK_EQUAL(i, kthOrderStatistics.quickselect(v,i));
 	}
 
 }

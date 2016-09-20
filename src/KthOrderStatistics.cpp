@@ -11,7 +11,27 @@ KthOrderStatistics::~KthOrderStatistics()
   
 }
 
-int KthOrderStatistics::quickselect(vector<int> &v, int k)
+int KthOrderStatistics::orderselect(vector<int> v, int k){
+
+    sort(v.begin(), v.end());
+    return v[k];
+
+}
+
+int KthOrderStatistics::kheapsort(vector<int> v, int k){
+
+    priority_queue< int, vector<int>, greater<int> > heap;
+    for(int i : v){
+        heap.push(i);
+    }
+    for(int j = 0; j < k; j++){
+        heap.pop();
+    }
+    return heap.top();
+
+}
+
+int KthOrderStatistics::quickselect(vector<int> v, int k)
 {
     
     int pos = -1;
@@ -30,18 +50,6 @@ int KthOrderStatistics::quickselect(vector<int> &v, int k)
     return v[pos];
 }
 
-int KthOrderStatistics::kheapsort(vector<int> &v, int k){
-
-    priority_queue< int, vector<int>, greater<int> > heap;
-    for(int i : v){
-        heap.push(i);
-    }
-    for(int j = 0; j < k; j++){
-        heap.pop();
-    }
-    return heap.top();
-
-}
 
 int KthOrderStatistics::partition(vector<int> &v, int start, int end){
 
