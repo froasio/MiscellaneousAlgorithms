@@ -3,7 +3,7 @@ SILENCE=@
 
 #---- Outputs ----#
 CPPUTEST_HOME = cpputest/cpputest_build
-CPPUTEST_CXXFLAGS = -std=c++11 
+CPPUTEST_CXXFLAGS = -std=c++11 -Wno-c++14-compat
 COMPONENT_NAME = TDAI-TPI
 TARGET_LIB = \
 	lib/lib$(COMPONENT_NAME).a

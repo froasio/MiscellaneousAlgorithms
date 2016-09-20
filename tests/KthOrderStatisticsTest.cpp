@@ -29,3 +29,16 @@ TEST(kthOrderStatisticsTest, testQuickselectReturnsKthOrderStatistics)
 	}
 
 }
+
+TEST(kthOrderStatisticsTest, testKheapsortReturnsKthOrderStatistics)
+{
+	
+	KthOrderStatistics kthOrderStatistics;
+	vector<int> v(100);
+	iota (v.begin(), v.end(), 1);
+	for(int i=1; i<=(int)v.size(); i++){
+		random_shuffle(v.begin(), v.end());
+		CHECK_EQUAL(i, kthOrderStatistics.kheapsort(v,i));
+	}
+
+}

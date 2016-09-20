@@ -30,6 +30,19 @@ int KthOrderStatistics::quickselect(vector<int> &v, int k)
     return v[pos];
 }
 
+int KthOrderStatistics::kheapsort(vector<int> &v, int k){
+
+    priority_queue< int, vector<int>, greater<int> > heap;
+    for(int i : v){
+        heap.push(i);
+    }
+    for(int j = 1; j < k; j++){
+        heap.pop();
+    }
+    return heap.top();
+
+}
+
 int KthOrderStatistics::partition(vector<int> &v, int start, int end){
 
     int i_pivot = pivot(v,start,end);
