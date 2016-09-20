@@ -22,8 +22,8 @@ TEST(kthOrderStatisticsTest, testQuickselectReturnsKthOrderStatistics)
 	
 	KthOrderStatistics kthOrderStatistics;
 	vector<int> v(100);
-	iota (v.begin(), v.end(), 1);
-	for(int i=1; i<=(int)v.size(); i++){
+	iota (v.begin(), v.end(), 0);
+	for(int i=0; i<(int)v.size(); i++){
 		random_shuffle(v.begin(), v.end());
 		CHECK_EQUAL(i, kthOrderStatistics.quickselect(v,i));
 	}
@@ -35,8 +35,8 @@ TEST(kthOrderStatisticsTest, testKheapsortReturnsKthOrderStatistics)
 	
 	KthOrderStatistics kthOrderStatistics;
 	vector<int> v(100);
-	iota (v.begin(), v.end(), 1);
-	for(int i=1; i<=(int)v.size(); i++){
+	iota (v.begin(), v.end(), 0);
+	for(int i=0; i<(int)v.size(); i++){
 		random_shuffle(v.begin(), v.end());
 		CHECK_EQUAL(i, kthOrderStatistics.kheapsort(v,i));
 	}

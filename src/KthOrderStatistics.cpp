@@ -17,7 +17,7 @@ int KthOrderStatistics::quickselect(vector<int> &v, int k)
     int pos = -1;
     int start = 0;
     int end = (int)v.size() - 1;
-    k = k - 1;
+    
     while(pos != k){
         
         pos  = partition(v,start,end);
@@ -36,7 +36,7 @@ int KthOrderStatistics::kheapsort(vector<int> &v, int k){
     for(int i : v){
         heap.push(i);
     }
-    for(int j = 1; j < k; j++){
+    for(int j = 0; j < k; j++){
         heap.pop();
     }
     return heap.top();
