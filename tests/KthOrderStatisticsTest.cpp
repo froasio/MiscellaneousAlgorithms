@@ -25,8 +25,11 @@ TEST(kthOrderStatisticsTest, testRandomInputs)
 	iota (v.begin(), v.end(), 0);
 	for(int i=0; i<(int)v.size(); i++){
 		random_shuffle(v.begin(), v.end());
+		CHECK_EQUAL(i, kthOrderStatistics.bruteforce(v,i));
 		CHECK_EQUAL(i, kthOrderStatistics.orderselect(v,i));
+		CHECK_EQUAL(i, kthOrderStatistics.kselect(v,i));
 		CHECK_EQUAL(i, kthOrderStatistics.kheapsort(v,i));
+		CHECK_EQUAL(i, kthOrderStatistics.heapselect(v,i));
 		CHECK_EQUAL(i, kthOrderStatistics.quickselect(v,i));
 	}
 
