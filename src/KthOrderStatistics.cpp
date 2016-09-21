@@ -21,11 +21,16 @@ int KthOrderStatistics::bruteforce(vector<int> v, int k){
 
 bool KthOrderStatistics::isksmallest(vector<int> &v, int target, int k){
     int count = 0;
+    int repeated = -1;
     for(int i: v){
         if(target > i)
             count++;
+        if(target == i)
+            repeated++;
     }
-    return count == k;
+    if(count == k) return true;
+    if(count > k) return false;
+    return count + repeated >= k;
 }
 
 int KthOrderStatistics::orderselect(vector<int> v, int k){

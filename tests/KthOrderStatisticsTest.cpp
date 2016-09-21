@@ -34,3 +34,22 @@ TEST(kthOrderStatisticsTest, testRandomInputs)
 	}
 
 }
+
+TEST(kthOrderStatisticsTest, testEqualInputs)
+{
+	
+	KthOrderStatistics kthOrderStatistics;
+	vector<int> v = {3,2,1,3,3};
+	vector<int> r(v.begin(), v.end());
+	sort(r.begin(), r.end());
+	
+	for(int i=0; i<(int)v.size(); i++){
+		CHECK_EQUAL(r[i], kthOrderStatistics.bruteforce(v,i));
+		CHECK_EQUAL(r[i], kthOrderStatistics.orderselect(v,i));
+		CHECK_EQUAL(r[i], kthOrderStatistics.kselect(v,i));
+		CHECK_EQUAL(r[i], kthOrderStatistics.kheapsort(v,i));
+		CHECK_EQUAL(r[i], kthOrderStatistics.heapselect(v,i));
+		CHECK_EQUAL(r[i], kthOrderStatistics.quickselect(v,i));
+	}
+
+}
