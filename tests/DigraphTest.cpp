@@ -19,5 +19,5 @@ TEST(digraphTest, testThatGraphReturnsVertexes)
 {
 	Digraph g(10);
 	CHECK_EQUAL(10,g.V());
-
+	CHECK_EQUAL(0,g.E());
 }
