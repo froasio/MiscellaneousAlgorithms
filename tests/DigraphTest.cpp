@@ -1,4 +1,5 @@
 #include "CppUTest/TestHarness.h"
+#include "Digraph.h"
 
 TEST_GROUP(digraphTest)
 {
@@ -14,9 +15,9 @@ TEST_GROUP(digraphTest)
     }
 };
 
-TEST(digraphTest, testRandomInputs)
+TEST(digraphTest, testThatGraphReturnsVertexes)
 {
-	
-	CHECK_EQUAL(true,true);
+	Digraph g(10);
+	CHECK_EQUAL(10,g.V());
 
 }
