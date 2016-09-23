@@ -1,6 +1,6 @@
 #include "Digraph.h"
 
-Digraph::Digraph(int vv) : v(vv), e(0){
+Digraph::Digraph(int vv) : v(vv), e(0), adj(vv) {
 
 }
 
@@ -14,4 +14,10 @@ int Digraph::V(){
 
 int Digraph::E(){
 	return this->e;
+}
+
+void Digraph::addEdge(int s, int d, int w) {
+	Edge edge(s,d,w);
+	adj[s].push_back(edge);
+	this->e++;
 }

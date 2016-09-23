@@ -21,3 +21,11 @@ TEST(digraphTest, testThatGraphReturnsVertexes)
 	CHECK_EQUAL(10,g.V());
 	CHECK_EQUAL(0,g.E());
 }
+
+TEST(digraphTest, testWhenAddEdgeEdgesIncrease)
+{
+	Digraph g(10);
+	g.addEdge(1,2,3);
+	CHECK_EQUAL(10,g.V());
+	CHECK_EQUAL(1,g.E());
+}
