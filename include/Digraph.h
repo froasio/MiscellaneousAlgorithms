@@ -18,14 +18,16 @@ class Digraph
         void addEdge(int s, int d, int w);
         void addEdge(Edge edge);
         void iterEdges(function<void(Edge&)> f);
-        void adj(int v, function<void(Edge&)> f);
+        void adj(int u, function<void(Edge&)> f);
+        void adjE(int u, function<void(Edge&)> f);
+        void iter(function<void(int)> f);
 
     private:
 
 	    const int v;
 	    int e;
-	    vector<list<Edge>> adj;
-	    vector<list<Edge>> inc;
+	    vector<list<Edge>> adj_e;
+	    vector<list<Edge>> inc_e;
 
 };
 
