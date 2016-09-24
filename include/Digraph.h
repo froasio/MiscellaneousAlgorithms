@@ -18,6 +18,7 @@ class Digraph
         void addEdge(int s, int d, int w);
         void addEdge(Edge edge);
         void iterEdges(function<void(Edge&)> f);
+        void adj(int v, function<void(Edge&)> f);
 
     private:
 

@@ -10,9 +10,15 @@ class Edge
         Edge();
         ~Edge();
 
-        int getSource();
-        int getDestination();
-        int getWeight();
+        int getSource() const;
+        int getDestination() const;
+        int getWeight() const;
+        bool operator==(const Edge& re) const;
+        bool operator!=(const Edge& re) const;
+        bool operator<(const Edge& re) const; 
+        bool operator>(const Edge& re) const;
+        bool operator<=(const Edge& re) const;
+        bool operator>=(const Edge& re) const;
 
         static Edge make_edge(int s, int d, int w);
 

@@ -42,7 +42,6 @@ TEST(digraphTest, testGraphAllEdgesIteration){
 	}
 
 	g.iterEdges([&](Edge& edge){
-		CHECK_EQUAL(edge.getSource(), v[edge.getWeight()].getSource());
-		CHECK_EQUAL(edge.getDestination(), v[edge.getWeight()].getDestination());
+		CHECK(v[edge.getWeight()] == edge);
 	});
 }

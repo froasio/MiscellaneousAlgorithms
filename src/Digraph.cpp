@@ -36,3 +36,8 @@ void Digraph::iterEdges(function<void(Edge&)> f){
 	}
 
 }
+
+void Digraph::adj(int v, function<void(Edge&)> f) {
+	for(Edge& edge : adj[v])
+		f(edge);
+}
