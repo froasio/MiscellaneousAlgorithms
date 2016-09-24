@@ -7,16 +7,18 @@ class Edge
 {
     public:
         Edge(int s, int d, int w);
+        Edge();
         ~Edge();
-        Edge() = delete;
 
         int getSource();
         int getDestination();
         int getWeight();
 
+        static Edge make_edge(int s, int d, int w);
+
     private:
-        const int source;
-        const int destination;
+        int source;
+        int destination;
         int weight;
 };
 

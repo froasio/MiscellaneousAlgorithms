@@ -16,12 +16,15 @@ class Digraph
         int V();
         int E();
         void addEdge(int s, int d, int w);
+        void addEdge(Edge edge);
+        void iterEdges(function<void(Edge&)> f);
 
     private:
 
-    const int v;
-    int e;
-    vector<list<Edge>> adj;
+	    const int v;
+	    int e;
+	    vector<list<Edge>> adj;
+	    vector<list<Edge>> inc;
 
 };
 
