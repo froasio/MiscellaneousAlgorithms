@@ -12,7 +12,7 @@ Digraph::Digraph(ifstream &ifs) {
 	this->v = vv;
 	this->e = ee;
 
-	for(int e = 0; e < ee; e++){
+	for(int ei = 0; ei < ee; ei++){
 		ifs >> src >> dst >> weight;
 		this->addEdge(src, dst, weight);
 	}

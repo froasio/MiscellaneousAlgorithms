@@ -13,7 +13,7 @@ class Digraph
 {
     public:
         Digraph(int vv);
-        Digraph(ifstream &ifs)
+        Digraph(ifstream &ifs);
         ~Digraph();
         Digraph() = delete;
         int V();
