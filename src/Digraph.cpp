@@ -8,9 +8,11 @@ Digraph::Digraph(ifstream &ifs) {
 	int vv, ee, src, dst;
 	double weight;
 	ifs >> vv >> ee;
-	
+
 	this->v = vv;
-	this->e = ee;
+	
+	this->adj_e.resize(vv);
+	this->inc_e.resize(vv);
 
 	for(int ei = 0; ei < ee; ei++){
 		ifs >> src >> dst >> weight;
