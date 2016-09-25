@@ -1,6 +1,6 @@
 #include "Edge.h"
 
-Edge::Edge(int s, int d, int w) : source(s), destination(d), weight(w) {
+Edge::Edge(int s, int d, double w) : source(s), destination(d), weight(w) {
 
 }
 
@@ -20,11 +20,11 @@ int Edge::getDestination() const{
 	return this->destination;
 }
 
-int Edge::getWeight() const{
+double Edge::getWeight() const{
 	return this->weight;
 }
 
-Edge Edge::make_edge(int s, int d, int w){
+Edge Edge::make_edge(int s, int d, double w){
 	Edge edge(s,d,w);
 	return edge;
 }
@@ -53,4 +53,11 @@ bool Edge::operator<=(const Edge& re) const{
 
 bool Edge::operator>=(const Edge& re) const{
 	return !(*this < re);
+}
+
+string Edge::toString() {
+	stringstream ws;
+	ws << fixed << setprecision(1) << this->getWeight();
+	string es = to_string(this->getSource()) + " " + to_string(this->getDestination()) + " " + ws.str();
+	return es;
 }
