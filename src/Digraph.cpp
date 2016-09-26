@@ -10,7 +10,7 @@ Digraph::Digraph(ifstream &ifs) {
 	ifs >> vv >> ee;
 
 	this->v = vv;
-	
+	this->e = 0;
 	this->adj_e.resize(vv);
 	this->inc_e.resize(vv);
 
