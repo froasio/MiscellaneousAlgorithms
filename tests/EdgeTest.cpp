@@ -30,3 +30,8 @@ TEST(edgeTest, testMakeEdgeReturnsEdge)
 	CHECK_EQUAL(2,e.getDestination());
 	CHECK_EQUAL(3,e.getWeight());
 }
+
+TEST(edgeTest, testPairSerialization){
+	Edge e = Edge::make_edge(1,2,3);
+	CHECK("(1,2)" == e.toStringPair());
+}

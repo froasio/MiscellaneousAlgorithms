@@ -11,18 +11,20 @@ using namespace std;
 class ShortestPath
 {
 	public:
-		ShortestPath(Digraph &g, int origin);
+		ShortestPath(Digraph &g, int source, int destination);
 		bool isVisited(int v);
 		list<Edge> path(int v);
-		virtual double distance(int v) = 0;
+		string stringPath(int v);
+		double distance(int v);
 		~ShortestPath();
 
 	protected:
-		virtual Edge edgeTo(int v) = 0;
-
-	private:
+		virtual void run(Digraph &g) = 0;
+		Edge edgeTo(int v);
 		int src;
-		vector<double> distances;	
+		int dst;
+		vector<double> distances;
+		vector<Edge> edges; 	
 };
 
 #endif

@@ -23,6 +23,7 @@ class Edge
         bool operator<=(const Edge& re) const;
         bool operator>=(const Edge& re) const;
         string toString();
+        string toStringPair();
 
         static Edge make_edge(int s, int d, double w);
 

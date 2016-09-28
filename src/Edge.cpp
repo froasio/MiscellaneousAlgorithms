@@ -61,3 +61,7 @@ string Edge::toString() {
 	string es = to_string(this->getSource()) + " " + to_string(this->getDestination()) + " " + ws.str();
 	return es;
 }
+
+string Edge::toStringPair() {
+	return "(" + to_string(this->getSource()) + "," + to_string(this->getDestination()) + ")";
+}
