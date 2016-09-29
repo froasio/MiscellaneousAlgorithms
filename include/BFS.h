@@ -6,7 +6,7 @@
 class BFS : public ShortestPath
 {
 public:
-	void run(Digraph &g);
+	BFS(Digraph &g, int source, int destination);
 };
 
 #endif

@@ -1,6 +1,7 @@
 #include "BFS.h"
 
-void BFS::run(Digraph &g){
+BFS::BFS(Digraph &g, int source, int destination):
+	ShortestPath(g,source,destination){
 	queue<int> q;
 	int current_vertex;
 	

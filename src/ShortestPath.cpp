@@ -6,8 +6,6 @@ ShortestPath::ShortestPath(Digraph &g, int source, int destination)
 	 distances(g.V(), numeric_limits<double>::infinity()),
 	 edges(g.V()) {
 
-	 this->run(g);
-
 }
 
 bool ShortestPath::isVisited(int v) {

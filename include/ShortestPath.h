@@ -19,7 +19,6 @@ class ShortestPath
 		~ShortestPath();
 
 	protected:
-		virtual void run(Digraph &g) = 0;
 		Edge edgeTo(int v);
 		int src;
 		int dst;
