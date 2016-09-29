@@ -8,16 +8,20 @@ ShortestPath::ShortestPath(Digraph &g, int source, int destination)
 
 }
 
+ShortestPath::~ShortestPath(){
+	
+}
+
 bool ShortestPath::isVisited(int v) {
 	return this->distance(v) != numeric_limits<double>::infinity();
 }
 
 double ShortestPath::distance(int v) {
-	return this->distance(v);
+	return this->distances[v];
 }
 
 Edge ShortestPath::edgeTo(int v) {
-	return this->edgeTo(v);
+	return this->edges[v];
 }
 
 list<Edge> ShortestPath::path(int v) {
