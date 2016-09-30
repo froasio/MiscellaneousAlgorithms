@@ -1,11 +1,10 @@
 #include "ShortestPath.h"
 
-ShortestPath::ShortestPath(Digraph &g, int source, int destination)
+ShortestPath::ShortestPath(Digraph &g, int source)
 	:src(source),
-	 dst(destination),
 	 distances(g.V(), numeric_limits<double>::infinity()),
 	 edges(g.V()) {
-
+	 	this->distances[source] = 0;
 }
 
 ShortestPath::~ShortestPath(){
@@ -44,7 +43,7 @@ list<Edge> ShortestPath::path(int v) {
 
 string ShortestPath::stringPath(int v){
 	list<Edge> p = this->path(v);
-	string sp;
+	string sp = "";
 	for(Edge &edge : p){
 		sp += edge.toStringPair() + ",";
 	}

@@ -11,7 +11,7 @@ using namespace std;
 class ShortestPath
 {
 	public:
-		ShortestPath(Digraph &g, int source, int destination);
+		ShortestPath(Digraph &g, int source);
 		bool isVisited(int v);
 		list<Edge> path(int v);
 		string stringPath(int v);
@@ -21,7 +21,6 @@ class ShortestPath
 	protected:
 		Edge edgeTo(int v);
 		int src;
-		int dst;
 		vector<double> distances;
 		vector<Edge> edges; 	
 };
