@@ -6,12 +6,12 @@ TEST_GROUP(skipListTest)
 
     void setup()
     {
-        MemoryLeakWarningPlugin::turnOffNewDeleteOverloads();
+//        MemoryLeakWarningPlugin::turnOffNewDeleteOverloads();
     }
 
     void teardown()
     {
-        MemoryLeakWarningPlugin::turnOnNewDeleteOverloads();
+//        MemoryLeakWarningPlugin::turnOnNewDeleteOverloads();
     }
 };
 
@@ -22,6 +22,9 @@ TEST(skipListTest, testSkipListInsert)
 	sl.insert(2,"mundo");
     sl.insert(3,"feliz");
     std::string esl = "((1,hola),(2,mundo),(3,feliz))";
+    CHECK(esl == sl.toString());
+    sl.insert(3,"alegre");
+    esl = "((1,hola),(2,mundo),(3,alegre))";
     CHECK(esl == sl.toString());
 }
 

@@ -16,7 +16,13 @@ struct SkipNode {
 
     std::vector<SkipNode*> forward;
 
-    SkipNode (int k, const std::string& v, int level); 
+    SkipNode (int k, const std::string& v, int level)
+      :  key(k), value(v), forward(level)
+    {
+        for (int i = 0; i < level; ++i) {
+            forward[i]  = nullptr;
+        }
+    } 
 
 };
 
@@ -35,13 +41,12 @@ private:
     // Pointer to first node
     SkipNode* head;
     // Pointer to Last node
-    SkipNode* NIL;
+    SkipNode* tail;
     float probability;
     int maxLevel;
+    int currentLevel;
 
     int randomLevel (); 
-    int nodeLevel(const std::vector<SkipNode*>& v);
-    SkipNode* makeNode (int key, std::string val, int level);
 
 };
 
