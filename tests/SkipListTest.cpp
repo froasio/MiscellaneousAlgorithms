@@ -6,12 +6,12 @@ TEST_GROUP(skipListTest)
 
     void setup()
     {
-//        MemoryLeakWarningPlugin::turnOffNewDeleteOverloads();
+        MemoryLeakWarningPlugin::turnOffNewDeleteOverloads();
     }
 
     void teardown()
     {
-//        MemoryLeakWarningPlugin::turnOnNewDeleteOverloads();
+        MemoryLeakWarningPlugin::turnOnNewDeleteOverloads();
     }
 };
 

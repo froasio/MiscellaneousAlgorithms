@@ -1,16 +1,16 @@
 #include "SkipList.h"
 
 SkipList::SkipList()
-    : probability(0.5), maxLevel(16), currentLevel(1)
+    : probability(0.5), maxLevel(16), currentLevel(0)
 {
 
     int headKey = std::numeric_limits<int>::min();
     head = new SkipNode(headKey, "HEAD", maxLevel);
 
-    int nilKey = std::numeric_limits<int>::max();
-    tail = new SkipNode(nilKey, "TAIL", maxLevel);
+    int tailKey = std::numeric_limits<int>::max();
+    tail = new SkipNode(tailKey, "TAIL", maxLevel);
 
-    for (size_t i = 0; i < head->forward.size(); ++i) {
+    for (size_t i = 0; i < head->forward.size(); i++) {
         head->forward[i] = tail;
     }
 }
@@ -26,7 +26,7 @@ SkipList::~SkipList () {
 }
 
 int SkipList::randomLevel () {
-    int v = 1;
+    int v = 0;
 
     while ((((double)std::rand() / RAND_MAX)) < probability && 
            std::abs(v) < maxLevel) {
@@ -58,7 +58,7 @@ std::string SkipList::toString () {
 SkipNode* SkipList::find(int searchKey) {
     SkipNode* x = head;
 
-    for (size_t i = currentLevel; i-- > 0;) {
+    for (int i = currentLevel; i >= 0; i--) {
         while (x->forward[i] != nullptr && x->forward[i]->key < searchKey) {
             x = x->forward[i];
         }   
@@ -75,7 +75,7 @@ void SkipList::insert(int searchKey, std::string newValue) {
     SkipNode* x = head;
     std::vector<SkipNode*> update(head->forward);
 
-    for (size_t i = currentLevel; i-- > 0;) {
+    for (int i = currentLevel; i >= 0; i--) {
 
         while (x->forward[i] != nullptr && x->forward[i]->key < searchKey) {
 
@@ -86,7 +86,6 @@ void SkipList::insert(int searchKey, std::string newValue) {
     }
     x = x->forward[0];
 
-    // create new node
     if (x->key == searchKey) {
 
         x->value = newValue;
@@ -95,10 +94,9 @@ void SkipList::insert(int searchKey, std::string newValue) {
     } else {
 
         int newNodeLevel = randomLevel();
-
         if (newNodeLevel > currentLevel) {
 
-            for (int i = currentLevel + 1; i < newNodeLevel; ++i) {
+            for (int i = currentLevel + 1; i < newNodeLevel; i++) {
                 update[i] = head;
             }
             currentLevel = newNodeLevel;   
@@ -107,11 +105,9 @@ void SkipList::insert(int searchKey, std::string newValue) {
 
         x = new SkipNode(searchKey, newValue, newNodeLevel);
 
-        for (int i = 0; i < newNodeLevel; ++i) {
-
+        for (int i = 0; i <= currentLevel; i++) {
             x->forward[i] = update[i]->forward[i];
             update[i]->forward[i] = x;
-
         }
         
     }
@@ -122,7 +118,7 @@ void SkipList::erase (int searchKey) {
     std::vector<SkipNode*> update(head->forward);
     SkipNode* x = head;
 
-    for (size_t i = currentLevel; i-- > 0;) {
+    for (int i = currentLevel; i >= 0; i--) {
 
         while (x->forward[i] != nullptr && x->forward[i]->key < searchKey) {
 
@@ -134,7 +130,7 @@ void SkipList::erase (int searchKey) {
     x = x->forward[0];
 
     if (x->key == searchKey) {
-        for (size_t i = 0; i < update.size(); ++i) {
+        for (size_t i = 0; i < update.size(); i++) {
 
             if (update[i]->forward[i] != x) {
                 break;
@@ -144,7 +140,7 @@ void SkipList::erase (int searchKey) {
 
         delete x;
   
-        while ( currentLevel > 0  && head->forward[currentLevel] == tail )
+        while ( currentLevel >= 0  && head->forward[currentLevel] == tail )
             currentLevel--;        
     }    
 }

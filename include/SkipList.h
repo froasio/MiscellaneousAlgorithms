@@ -17,9 +17,9 @@ struct SkipNode {
     std::vector<SkipNode*> forward;
 
     SkipNode (int k, const std::string& v, int level)
-      :  key(k), value(v), forward(level)
+      :  key(k), value(v), forward(level+1)
     {
-        for (int i = 0; i < level; ++i) {
+        for (int i = 0; i <= level; ++i) {
             forward[i]  = nullptr;
         }
     } 
