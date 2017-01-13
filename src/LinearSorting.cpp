@@ -30,3 +30,17 @@ void LinearSorting::counting(vector<int> &v) {
 	}
 
 }
+
+void LinearSorting::counting(string &s) {
+
+	char d[256] = {};
+	int z = 0;
+
+	for(char c: s)
+		d[(size_t)c]++;
+
+	for(int i = 0; i < 256; i++)
+		while(d[i]--)
+			s[z++] = (char)i;
+
+}

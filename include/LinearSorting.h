@@ -1,6 +1,7 @@
 #ifndef LINEAR_SORTING_H
 #define LINEAR_SORTING_H
 #include <vector>
+#include <string>
 #include <iostream>
 #include <queue>
 #include <algorithm>
@@ -14,8 +15,8 @@ class LinearSorting
         ~LinearSorting(){};
 
         void counting(vector<int> &v);
+        void counting(string &s);
         
-    private:
 };
 
 #endif

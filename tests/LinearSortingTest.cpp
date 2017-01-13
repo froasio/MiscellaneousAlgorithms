@@ -27,3 +27,15 @@ TEST(linearSortingTest, countingSortTest)
         CHECK(sorted_array[i] == unsorted_vector[i]);
     }
 }
+
+TEST(linearSortingTest, countingSortStringTest)
+{
+    LinearSorting ls;
+    std::string unsorted_string = "bablalluquq";
+    std::string sorted_string = "aabblllqquu";
+    
+    ls.counting(unsorted_string);
+    
+    CHECK(unsorted_string == sorted_string); 
+
+}
