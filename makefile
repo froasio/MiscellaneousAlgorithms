@@ -17,6 +17,7 @@ CPP_PLATFORM = Gcc
 
 SRC_DIRS = \
 	src \
+	src/TagParser\
 
 TEST_SRC_DIRS = \
 	tests\
@@ -26,6 +27,7 @@ INCLUDE_DIRS =\
   .\
   $(CPPUTEST_HOME)/include\
   $(PROJECT_HOME_DIR)/include\
+  $(PROJECT_HOME_DIR)/include/TagParser\
 
 CPPUTEST_USE_MEM_LEAK_DETECTION = N
 CPPUTEST_USE_GCOV = Y
