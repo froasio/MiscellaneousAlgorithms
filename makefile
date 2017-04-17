@@ -3,7 +3,7 @@ SILENCE=@
 
 #---- Outputs ----#
 CPPUTEST_HOME = cpputest/cpputest_build
-CPPUTEST_CXXFLAGS = -std=c++11
+CPPUTEST_CXXFLAGS = -std=c++11 -Wno-switch-enum
 COMPONENT_NAME = MISCELLANEUS-ALGORITHMS
 TARGET_LIB = \
 	lib/lib$(COMPONENT_NAME).a
@@ -27,7 +27,7 @@ INCLUDE_DIRS =\
   $(CPPUTEST_HOME)/include\
   $(PROJECT_HOME_DIR)/include\
 
-CPPUTEST_USE_MEM_LEAK_DETECTION = Y
+CPPUTEST_USE_MEM_LEAK_DETECTION = N
 CPPUTEST_USE_GCOV = Y
 
 include MakefileWorker.mk
