@@ -1,5 +1,5 @@
-#ifndef MML_ERRORTYPE_H
-#define MML_ERRORTYPE_H
+#ifndef FRL_ERRORTYPE_H
+#define FRL_ERRORTYPE_H
 
 
 enum class ErrorType {
@@ -59,4 +59,23 @@ inline const char *ErrorTypeToString(ErrorType v) {
     }
 }
 
-#endif //MML_ERRORTYPE_H
+inline ErrorType ErrorTypeFromString(std::string v) {
+    if( v == "WRONG_CHAR_IN_TAG_NAME" ) {
+        return ErrorType::WRONG_CHAR_IN_TAG_NAME;
+    } else if( v == "WRONG_NUMBER_CHARS_IN_TAG" ) {
+        return ErrorType::WRONG_NUMBER_CHARS_IN_TAG;
+    } else if( v == "UNEXPECTED_CLOSING_TAG_CHAR" ) {
+        return ErrorType::UNEXPECTED_CLOSING_TAG_CHAR;
+    } else if( v == "UNBALANCED_TAG" ) {
+        return ErrorType::UNBALANCED_TAG;
+    } else if( v == "UNCLOSED_TAG" ) {
+        return ErrorType::UNCLOSED_TAG;
+    } else if( v == "UNEXPECTED_END_OF_STREAM" ) {
+        return ErrorType::UNEXPECTED_END_OF_STREAM;
+    } else {
+        return ErrorType::DEFAULT_TAG_ERROR;
+    }
+    return ErrorType::DEFAULT_TAG_ERROR;
+}
+
+#endif //FRL_ERRORTYPE_H

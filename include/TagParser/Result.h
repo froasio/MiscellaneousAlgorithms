@@ -1,6 +1,6 @@
 
-#ifndef MML_RESULT_H
-#define MML_RESULT_H
+#ifndef FRL_RESULT_H
+#define FRL_RESULT_H
 
 #include <string>
 #include "ErrorType.h"
@@ -15,6 +15,7 @@ private:
 public:
     Result(); // Successfully result
     Result(int line_number, ErrorType type); // Error with line number
+    Result(string json);
     bool isValid();
     int getLineError();
     ErrorType getErrorType();
@@ -22,4 +23,4 @@ public:
 };
 
 
-#endif //MML_RESULT_H
+#endif //FRL_RESULT_H

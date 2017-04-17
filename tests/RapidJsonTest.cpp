@@ -20,4 +20,6 @@ TEST(rapidjsonTest, testParseJsonFromFile)
 	rapidjson::Document document;
     document.Parse<0>(jsonString.c_str());
     CHECK(document.HasMember("valid"));
+    CHECK_FALSE(document["valid"].GetBool());
+    CHECK(document["error"]["line"].GetInt() == 3);
 }

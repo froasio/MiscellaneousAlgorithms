@@ -28,6 +28,7 @@ INCLUDE_DIRS =\
   $(CPPUTEST_HOME)/include\
   $(PROJECT_HOME_DIR)/include\
   $(PROJECT_HOME_DIR)/include/TagParser\
+  $(PROJECT_HOME_DIR)/include/rapidjson\
 
 CPPUTEST_USE_MEM_LEAK_DETECTION = N
 CPPUTEST_USE_GCOV = Y

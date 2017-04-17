@@ -74,6 +74,20 @@ TEST(tagParser, testValidAndInvalidResults)
 
 }
 
+TEST(tagParser, testParseResultFromFile)
+{
+
+    std::ifstream json("./tests/test.json");
+    std::string jsonString((std::istreambuf_iterator<char>(json)),
+                     std::istreambuf_iterator<char>());
+
+    Result result(jsonString);
+    CHECK_FALSE(result.isValid());
+    CHECK_EQUAL(3, result.getLineError());
+    CHECK(ErrorType::WRONG_NUMBER_CHARS_IN_TAG == result.getErrorType());
+
+}
+
 TEST(tagParser, phaseA)
 {
 
