@@ -6,6 +6,7 @@
 #include <iostream>
 #include <fstream>
 #include "Result.h"
+#include "FRLValidator.h"
 
 std::vector<std::string> getTests(std::string path)      
 {
@@ -24,40 +25,29 @@ std::vector<std::string> getTests(std::string path)
 }
 
 std::string readFile(std::string filename) {
-    std::ifstream in(filename, std::ios::in);
-    if (in) {
-        return (std::string((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>()));
-    }
-    throw (errno);
+    std::ifstream in(filename);
+    return (std::string((std::istreambuf_iterator<char>(in)), std::istreambuf_iterator<char>()));
 }
 
 
 void testPhase(std::string phase) {
-    string baseDir = "./tests/TagParser/";
-    std::vector<std::string> files = getTests(baseDir + phase);
+    string baseDir = "./tests/TagParser/" + phase + "/";
+    std::vector<std::string> files = getTests(baseDir);
     for(std::string file : files) {
-        // ifstream infrl, inresult;
+        ifstream infrl(baseDir + file + ".frl", ifstream::in);
+        std::cout << file << std::endl;
 
-        // infrl.open(baseDir + file + ".frl", ifstream::in);
-        // if (!infrl.is_open()) {
-        //     string msg = "Error: Can not read -> " + mfile;
-        //     cout << msg << endl;
-        //     throw msg;
+        FRLValidator validator;
+        Result result = validator.parse(&infrl);
 
-        // }
+        Result expectedResult(readFile(baseDir + file + ".result"));
 
-        // MMLValidator validator;
-        // Result result = validator.parse(&infrl);
+        CHECK(expectedResult.isValid() == result.isValid());
+        if(!expectedResult.isValid()) {
+            CHECK(expectedResult.getErrorType() == result.getErrorType());
+            CHECK(expectedResult.getLineError() == result.getLineError());
+        }
 
-        // Result expectedResult;
-        // result.fromJson(readFile(baseDir + file + ".result"));
-
-        // ASSERT_EQUAL(expectedResult->getSuccesful(), result->getSuccesful());
-        // ASSERT_EQUAL(expectedResult->getLine(), result->getLine());
-        // ASSERT_EQUAL(expectedResult->getErrorType(), result->getErrorType());
-
-        // infrl.close();
-        // inresult.close();
     }   
 }
 
