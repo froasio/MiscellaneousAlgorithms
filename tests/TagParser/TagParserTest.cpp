@@ -35,17 +35,16 @@ void testPhase(std::string phase) {
     std::vector<std::string> files = getTests(baseDir);
     for(std::string file : files) {
         ifstream infrl(baseDir + file + ".frl", ifstream::in);
-        std::cout << file << std::endl;
 
         FRLValidator validator;
         Result result = validator.parse(&infrl);
 
         Result expectedResult(readFile(baseDir + file + ".result"));
 
-        CHECK(expectedResult.isValid() == result.isValid());
+        CHECK_TEXT(expectedResult.isValid() == result.isValid(), file.c_str());
         if(!expectedResult.isValid()) {
-            CHECK(expectedResult.getErrorType() == result.getErrorType());
-            CHECK(expectedResult.getLineError() == result.getLineError());
+            CHECK_TEXT(expectedResult.getErrorType() == result.getErrorType(), result.toJson().c_str());
+            CHECK_TEXT(expectedResult.getLineError() == result.getLineError(), file.c_str());
         }
 
     }   
