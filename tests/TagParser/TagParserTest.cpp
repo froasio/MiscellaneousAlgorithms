@@ -83,3 +83,11 @@ TEST(tagParser, phaseA)
     testPhase("PhaseA");
 
 }
+
+
+TEST(tagParser, phaseB)
+{
+
+    testPhase("PhaseB");
+
+}
