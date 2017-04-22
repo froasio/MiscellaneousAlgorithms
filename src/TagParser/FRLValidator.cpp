@@ -10,7 +10,6 @@ bool FRLValidator::isValidCharacter(char c) {
 }
 
 Result FRLValidator::parse(ifstream *ifsp) {
-	std::cout << "----------------------" << std::endl;
 	ValidatorState state = IDLE;
 	int line = 1;
     ifstream &ifs = *ifsp;
@@ -36,9 +35,11 @@ Result FRLValidator::parse(ifstream *ifsp) {
        		case TAG_INIT:
        			if(!ifs.good())
        				return Result(line, ErrorType::UNCLOSED_TAG);
-       			if( nextChar == '/') {
+       			if( nextChar == '/')
        				state = CLOSING_TAG;
-       			} else if( nextChar == '>')
+       			else if ( nextChar == '!')
+       				state = CTAG;
+       			else if( nextChar == '>')
        				return Result(line, ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
        			else if(isValidCharacter(nextChar)) {
 	       			state = FRLValidator::OPEN_TAG;
@@ -59,7 +60,6 @@ Result FRLValidator::parse(ifstream *ifsp) {
        					return Result(line, ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
        			} else if(isValidCharacter(nextChar)) {
 	       			tag += nextChar;
-	       			std::cout << "Tag: " << tag << std::endl;
        			} else {
        				return Result(line, ErrorType::WRONG_CHAR_IN_TAG_NAME);
        			}
@@ -83,6 +83,12 @@ Result FRLValidator::parse(ifstream *ifsp) {
        			} else {
        				return Result(line, ErrorType::WRONG_CHAR_IN_TAG_NAME);       		
        			}
+       		break;
+       		case CTAG:
+       			if(!ifs.good())
+       				return Result(line, ErrorType::UNEXPECTED_END_OF_STREAM);
+       			if( nextChar == '>' )
+       					state = IDLE;
        		break;
        		default:
        			return Result();

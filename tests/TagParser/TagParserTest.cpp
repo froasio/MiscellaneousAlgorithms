@@ -43,7 +43,7 @@ void testPhase(std::string phase) {
 
         CHECK_TEXT(expectedResult.isValid() == result.isValid(), file.c_str());
         if(!expectedResult.isValid()) {
-            CHECK_TEXT(expectedResult.getErrorType() == result.getErrorType(), result.toJson().c_str());
+            CHECK_TEXT(expectedResult.getErrorType() == result.getErrorType(), file.c_str());
             CHECK_TEXT(expectedResult.getLineError() == result.getLineError(), file.c_str());
         }
 
@@ -89,5 +89,12 @@ TEST(tagParser, phaseB)
 {
 
     testPhase("PhaseB");
+
+}
+
+TEST(tagParser, phaseC)
+{
+
+    testPhase("PhaseC");
 
 }

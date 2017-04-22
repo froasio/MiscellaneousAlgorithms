@@ -8,7 +8,7 @@ public:
     Result parse(ifstream* in);
 private:
 	bool isValidCharacter(char c);
-	enum ValidatorState {IDLE, TAG_INIT, OPEN_TAG, CLOSING_TAG};
+	enum ValidatorState {IDLE, TAG_INIT, OPEN_TAG, CLOSING_TAG, CTAG};
 };
 
 
