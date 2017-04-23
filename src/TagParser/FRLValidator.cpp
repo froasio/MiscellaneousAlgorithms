@@ -2,7 +2,7 @@
 #include <iostream>
 #include <string>
 #include <stack>
-#include <utility>      // std::pair
+#include <utility>
 #include "FRLValidator.h"
 
 bool FRLValidator::isValidCharacter(char c) {
@@ -11,7 +11,7 @@ bool FRLValidator::isValidCharacter(char c) {
 
 Result FRLValidator::parse(ifstream *ifsp) {
 	ValidatorState state = IDLE;
-	int line = 1;
+    int line = 1;
     ifstream &ifs = *ifsp;
     char nextChar;
     std::string tag;
