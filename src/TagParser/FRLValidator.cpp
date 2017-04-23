@@ -96,8 +96,8 @@ Result FRLValidator::parse(ifstream *ifsp) {
     }
 
     if(!tags.empty()) {
-		std::pair<string,int> tagp = tags.top();
-		return Result(tagp.second, ErrorType::UNBALANCED_TAG);
+  		std::pair<string,int> tagp = tags.top();
+  		return Result(tagp.second, ErrorType::UNBALANCED_TAG);
     }
 
     return Result();
