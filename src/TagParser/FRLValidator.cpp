@@ -4,89 +4,87 @@
 #include <stack>
 #include <utility>
 #include "FRLValidator.h"
+#include "FRLValidatorContext.h"
 
 bool FRLValidator::isValidCharacter(char c) {
 	return c >= 'A' and c <= 'Z';
 }
 
 Result FRLValidator::parse(ifstream *ifsp) {
-	ValidatorState state = IDLE;
-    int line = 1;
-    ifstream &ifs = *ifsp;
-    char nextChar;
-    std::string tag;
-    std::stack<pair<string,int>> tags;
+	  ValidatorState state = IDLE;
+    FRLValidatorContext context(ifsp);
 
-    while (ifs.good()) {
+    char nextChar;
+
+    while (context.isGood()) {
        
-    	nextChar = (char) ifs.get();
+    	nextChar = context.getNextChar();
 
         if( nextChar == '\n' )
-        	line++;
+        	context.incrementLine();
 
         switch( state ) {
         	case IDLE:
-        		tag.erase();
+        		context.clearTag();
         		if( nextChar == '>')
-        			return Result(line, ErrorType::UNEXPECTED_CLOSING_TAG_CHAR);
+        			return Result(context.getLine(), ErrorType::UNEXPECTED_CLOSING_TAG_CHAR);
         		if( nextChar == '<')
         			state = FRLValidator::TAG_INIT;
         	break;
        		case TAG_INIT:
-       			if(!ifs.good())
-       				return Result(line, ErrorType::UNCLOSED_TAG);
+       			if(!context.isGood())
+       				return Result(context.getLine(), ErrorType::UNCLOSED_TAG);
        			if( nextChar == '/')
        				state = CLOSING_TAG;
        			else if ( nextChar == '!')
        				state = CTAG;
        			else if( nextChar == '>')
-       				return Result(line, ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
+       				return Result(context.getLine(), ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
        			else if(isValidCharacter(nextChar)) {
 	       			state = FRLValidator::OPEN_TAG;
-	       			tag += nextChar;
+	       			context.appendToTag(nextChar);
        			} else {
-       				return Result(line, ErrorType::WRONG_CHAR_IN_TAG_NAME);
+       				return Result(context.getLine(), ErrorType::WRONG_CHAR_IN_TAG_NAME);
        			}
        		break;
        		case OPEN_TAG:
-       			if(!ifs.good())
-       				return Result(line, ErrorType::UNCLOSED_TAG);
+       			if(!context.isGood())
+       				return Result(context.getLine(), ErrorType::UNCLOSED_TAG);
        			if( nextChar == '>' ) {
-       				if(tag.size() >= 1 and tag.size() <= 10) {
+       				if(context.tagSize() >= 1 and context.tagSize() <= 10) {
        					state = IDLE;
-       					tags.push(make_pair(tag,line));
+                context.pushTag(make_pair(context.getTag(),context.getLine()));
        				}
        				else
-       					return Result(line, ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
+       					return Result(context.getLine(), ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
        			} else if(isValidCharacter(nextChar)) {
-	       			tag += nextChar;
+	       			context.appendToTag(nextChar);
        			} else {
-       				return Result(line, ErrorType::WRONG_CHAR_IN_TAG_NAME);
+       				return Result(context.getLine(), ErrorType::WRONG_CHAR_IN_TAG_NAME);
        			}
        		break;
        		case CLOSING_TAG:
-       			if(!ifs.good())
-       				return Result(line, ErrorType::UNCLOSED_TAG);
+       			if(!context.isGood())
+       				return Result(context.getLine(), ErrorType::UNCLOSED_TAG);
        			if( nextChar == '>' ) {
-       				if(tag.size() >= 1 and tag.size() <= 10) {
+       				if(context.tagSize() >= 1 and context.tagSize() <= 10) {
        					state = IDLE;
-       					std::pair<string,int> tagp = tags.top();
-       					tags.pop();
-       					if(tagp.first != tag) {
-       						return Result(line, ErrorType::UNBALANCED_TAG);
+       					std::pair<string,int> tagp = context.popTag();
+       					if(tagp.first != context.getTag()) {
+       						return Result(context.getLine(), ErrorType::UNBALANCED_TAG);
        					}
        				}
        				else
-       					return Result(line, ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
+       					return Result(context.getLine(), ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
        			} else if(isValidCharacter(nextChar)) {
-	       			tag += nextChar;
+	       			context.appendToTag(nextChar);
        			} else {
-       				return Result(line, ErrorType::WRONG_CHAR_IN_TAG_NAME);       		
+       				return Result(context.getLine(), ErrorType::WRONG_CHAR_IN_TAG_NAME);       		
        			}
        		break;
        		case CTAG:
-       			if(!ifs.good())
-       				return Result(line, ErrorType::UNEXPECTED_END_OF_STREAM);
+       			if(!context.isGood())
+       				return Result(context.getLine(), ErrorType::UNEXPECTED_END_OF_STREAM);
        			if( nextChar == '>' )
        					state = IDLE;
        		break;
@@ -95,8 +93,8 @@ Result FRLValidator::parse(ifstream *ifsp) {
         }
     }
 
-    if(!tags.empty()) {
-  		std::pair<string,int> tagp = tags.top();
+    if(!context.isEmptyTagStack()) {
+  		std::pair<string,int> tagp = context.popTag();
   		return Result(tagp.second, ErrorType::UNBALANCED_TAG);
     }
 
