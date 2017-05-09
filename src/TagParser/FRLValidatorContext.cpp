@@ -6,6 +6,12 @@ FRLValidatorContext::FRLValidatorContext(std::ifstream *in) : ifs(*in) {
 
 }
 
+FRLValidatorContext::~FRLValidatorContext() {
+
+	delete state;
+
+}
+
 int FRLValidatorContext::getLine() {
 
 	return line;
@@ -70,4 +76,12 @@ bool FRLValidatorContext::isGood(){
 
 size_t FRLValidatorContext::tagSize() {
 	return tag.size();
+}
+
+bool FRLValidatorContext::process() {
+	return state->process(*this);
+}
+
+void FRLValidatorContext::setState(FRLValidatorState *st) {
+	state = st;
 }

@@ -5,11 +5,13 @@
 #include <stack>
 #include <fstream>
 #include <iostream>
+#include "FRLValidatorState.h"
 
 class FRLValidatorContext {
 
 	public:
 	    FRLValidatorContext(std::ifstream * in);
+	    ~FRLValidatorContext();
 	    int getLine();
 	    void incrementLine();
 	    std::string getTag();
@@ -21,12 +23,15 @@ class FRLValidatorContext {
 	    char getNextChar();
 	    bool isGood();
 	    size_t tagSize();
+	    bool process();
+	    void setState(FRLValidatorState *state);
 
 	private:
 	    int line;
 	    std::ifstream  &ifs;
 	    std::string tag;
 	    std::stack<std::pair<std::string,int>> tags;
+	    FRLValidatorState *state;
 
 };
 
