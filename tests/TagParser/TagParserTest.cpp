@@ -35,7 +35,6 @@ void testPhase(std::string phase) {
     std::vector<std::string> files = getTests(baseDir);
     for(std::string file : files) {
         ifstream infrl(baseDir + file + ".frl", ifstream::in);
-        std::cout << file << std::endl;
         FRLValidator validator;
         Result result = validator.parse(&infrl);
 
@@ -77,12 +76,12 @@ TEST(tagParser, testParseResultFromFile)
 
 }
 
-// TEST(tagParser, phaseA)
-// {
+TEST(tagParser, phaseA)
+{
 
-//     testPhase("PhaseA");
+    testPhase("PhaseA");
 
-// }
+}
 
 
 TEST(tagParser, phaseB)
@@ -92,9 +91,9 @@ TEST(tagParser, phaseB)
 
 }
 
-// TEST(tagParser, phaseC)
-// {
+TEST(tagParser, phaseC)
+{
 
-//     testPhase("PhaseC");
+    testPhase("PhaseC");
 
-// }
+}

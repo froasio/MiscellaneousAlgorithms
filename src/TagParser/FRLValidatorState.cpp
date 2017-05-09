@@ -12,6 +12,7 @@ bool FRLValidatorState::process(FRLValidatorContext &context) {
     	context.incrementLine();
 
     innerProcess(context);
+
     return context.isGood();	
 }
 

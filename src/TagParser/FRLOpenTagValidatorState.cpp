@@ -9,7 +9,7 @@ FRLOpenTagValidatorState::~FRLOpenTagValidatorState() {
 }
 
 void FRLOpenTagValidatorState::innerProcess(FRLValidatorContext &context) {
-	std::cout<<context.getTag()<<std::endl;
+
 	if(!context.isGood())
 		throw Result(context.getLine(), ErrorType::UNCLOSED_TAG);
 

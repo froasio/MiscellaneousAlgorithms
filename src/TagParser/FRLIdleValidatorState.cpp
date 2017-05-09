@@ -1,7 +1,6 @@
 #include "FRLIdleValidatorState.h"
 #include "FRLValidatorContext.h"
 #include "FRLTagInitValidatorState.h"
-#include "FRLEndFileValidatorState.h"
 #include "Result.h"
 #include "ErrorType.h"
 
@@ -12,11 +11,10 @@ FRLIdleValidatorState::~FRLIdleValidatorState() {
 void FRLIdleValidatorState::innerProcess(FRLValidatorContext &context) {
 	
 	context.clearTag();
-
-	if(!context.isGood()) {
-		context.setState(new FRLEndFileValidatorState());
-		delete this;
-		return;
+	
+	if(!context.isGood() and !context.isEmptyTagStack()) {
+  		std::pair<string,int> tagp = context.popTag();
+  		throw Result(tagp.second, ErrorType::UNBALANCED_TAG);
 	}
 
 	if( nextChar == '>')
