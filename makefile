@@ -1,6 +1,4 @@
 #Set this to @ to keep the makefile quiet
-SILENCE=@
-
 #---- Outputs ----#
 CPPUTEST_HOME = cpputest/cpputest_build
 CPPUTEST_CXXFLAGS = -std=c++11 -Wno-switch-enum
