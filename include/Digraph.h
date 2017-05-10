@@ -5,6 +5,7 @@
 #include <list>
 #include <string>
 #include <fstream>
+#include <functional>
 #include "Edge.h"
 
 using namespace std;
