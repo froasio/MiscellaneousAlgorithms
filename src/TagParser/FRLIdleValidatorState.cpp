@@ -21,7 +21,7 @@ void FRLIdleValidatorState::innerProcess(FRLValidatorContext &context) {
 		throw Result(context.getLine(), ErrorType::UNEXPECTED_CLOSING_TAG_CHAR);
 	if( nextChar == '<'){
 		context.setState(new FRLTagInitValidatorState());
-		delete this;
+		
 	}
 
 }

@@ -22,7 +22,7 @@ void FRLClosingTagValidatorState::innerProcess(FRLValidatorContext &context) {
 			throw Result(context.getLine(), ErrorType::UNBALANCED_TAG);
 		}
 		context.setState(new FRLIdleValidatorState());
-		delete this;
+		
 		
 	} else if(isValidCharacter(nextChar)) {
 	

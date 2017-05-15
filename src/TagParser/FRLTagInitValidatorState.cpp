@@ -20,18 +20,18 @@ void FRLTagInitValidatorState::innerProcess(FRLValidatorContext &context) {
 	
 	else if( nextChar == '/' ) {
 		context.setState(new FRLClosingTagValidatorState());
-		delete this;
+		
 	}
 
 	else if ( nextChar == '!' ) {
 		context.setState(new FRLCtagValidatorState());
-		delete this;
+		
 	}
 	
 	else if(isValidCharacter(nextChar)) {
 		context.appendToTag(nextChar);
 		context.setState(new FRLOpenTagValidatorState());
-		delete this;
+		
 	} else {
 		throw Result(context.getLine(), ErrorType::WRONG_CHAR_IN_TAG_NAME);
 	}

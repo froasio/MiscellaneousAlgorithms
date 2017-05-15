@@ -15,7 +15,7 @@ void FRLCtagValidatorState::innerProcess(FRLValidatorContext &context) {
 
 	if( nextChar == '>' ){
 		context.setState(new FRLIdleValidatorState());	
-		delete this;	
+			
 	}
 	
 }

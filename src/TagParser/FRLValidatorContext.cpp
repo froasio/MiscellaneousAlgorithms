@@ -3,6 +3,7 @@
 FRLValidatorContext::FRLValidatorContext(std::ifstream *in) : ifs(*in) {
 
 	line = 1;
+	state = NULL;
 
 }
 
@@ -83,5 +84,6 @@ bool FRLValidatorContext::process() {
 }
 
 void FRLValidatorContext::setState(FRLValidatorState *st) {
+	delete state;
 	state = st;
 }

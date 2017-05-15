@@ -20,7 +20,7 @@ void FRLOpenTagValidatorState::innerProcess(FRLValidatorContext &context) {
 
 	    context.pushTag(make_pair(context.getTag(),context.getLine()));
 		context.setState(new FRLIdleValidatorState());
-		delete this;
+		
 		
 	} else if(isValidCharacter(nextChar)) {
 	
