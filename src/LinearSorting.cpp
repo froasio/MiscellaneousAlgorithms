@@ -47,6 +47,7 @@ void LinearSorting::counting(string &s) {
 
 void LinearSorting::dnfSort(vector<int> &v) {
 	/*
+		http://users.monash.edu/~lloyd/tildeAlgDS/Sort/Flag/
 		Lo := 1; Mid := 1; Hi := N;
 		while Mid <= Hi do
 			Invariant: a[1..Lo-1]=0 and a[Lo..Mid-1]=1 and a[Hi+1..N]=2; a[Mid..Hi] are unknown.
