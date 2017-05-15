@@ -20,7 +20,7 @@ void FRLIdleValidatorState::innerProcess(FRLValidatorContext &context) {
 	if( nextChar == '>')
 		throw Result(context.getLine(), ErrorType::UNEXPECTED_CLOSING_TAG_CHAR);
 	if( nextChar == '<'){
-		context.setState(new FRLTagInitValidatorState());
+		context.setState(std::unique_ptr<FRLTagInitValidatorState>(new FRLTagInitValidatorState()));
 		
 	}
 

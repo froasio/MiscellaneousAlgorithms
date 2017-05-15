@@ -21,7 +21,7 @@ void FRLClosingTagValidatorState::innerProcess(FRLValidatorContext &context) {
 		if(tagp.first != context.getTag()) {
 			throw Result(context.getLine(), ErrorType::UNBALANCED_TAG);
 		}
-		context.setState(new FRLIdleValidatorState());
+		context.setState(std::unique_ptr<FRLIdleValidatorState>(new FRLIdleValidatorState()));
 		
 		
 	} else if(isValidCharacter(nextChar)) {

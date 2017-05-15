@@ -14,7 +14,7 @@ void FRLCtagValidatorState::innerProcess(FRLValidatorContext &context) {
 		throw Result(context.getLine(), ErrorType::UNEXPECTED_END_OF_STREAM);
 
 	if( nextChar == '>' ){
-		context.setState(new FRLIdleValidatorState());	
+		context.setState(std::unique_ptr<FRLIdleValidatorState>(new FRLIdleValidatorState()));	
 			
 	}
 	

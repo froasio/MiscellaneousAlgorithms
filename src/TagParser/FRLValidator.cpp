@@ -14,7 +14,7 @@ bool FRLValidator::isValidCharacter(char c) {
 Result FRLValidator::parse(ifstream *ifsp) {
 
     FRLValidatorContext context(ifsp);
-    context.setState(new FRLIdleValidatorState());
+    context.setState(std::unique_ptr<FRLIdleValidatorState>(new FRLIdleValidatorState()));
 
     try {
     

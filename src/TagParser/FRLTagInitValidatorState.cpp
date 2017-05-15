@@ -19,18 +19,18 @@ void FRLTagInitValidatorState::innerProcess(FRLValidatorContext &context) {
 		throw Result(context.getLine(), ErrorType::WRONG_NUMBER_CHARS_IN_TAG);
 	
 	else if( nextChar == '/' ) {
-		context.setState(new FRLClosingTagValidatorState());
+		context.setState(std::unique_ptr<FRLClosingTagValidatorState>(new FRLClosingTagValidatorState()));
 		
 	}
 
 	else if ( nextChar == '!' ) {
-		context.setState(new FRLCtagValidatorState());
+		context.setState(std::unique_ptr<FRLCtagValidatorState>(new FRLCtagValidatorState()));
 		
 	}
 	
 	else if(isValidCharacter(nextChar)) {
 		context.appendToTag(nextChar);
-		context.setState(new FRLOpenTagValidatorState());
+		context.setState(std::unique_ptr<FRLOpenTagValidatorState>(new FRLOpenTagValidatorState()));
 		
 	} else {
 		throw Result(context.getLine(), ErrorType::WRONG_CHAR_IN_TAG_NAME);

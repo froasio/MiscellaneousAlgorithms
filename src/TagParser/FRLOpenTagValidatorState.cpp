@@ -19,7 +19,7 @@ void FRLOpenTagValidatorState::innerProcess(FRLValidatorContext &context) {
 	if( nextChar == '>' ) {
 
 	    context.pushTag(make_pair(context.getTag(),context.getLine()));
-		context.setState(new FRLIdleValidatorState());
+		context.setState(std::unique_ptr<FRLIdleValidatorState>(new FRLIdleValidatorState()));
 		
 		
 	} else if(isValidCharacter(nextChar)) {

@@ -5,6 +5,7 @@
 #include <stack>
 #include <fstream>
 #include <iostream>
+#include <memory>
 #include "FRLValidatorState.h"
 
 class FRLValidatorContext {
@@ -24,14 +25,14 @@ class FRLValidatorContext {
 	    bool isGood();
 	    size_t tagSize();
 	    bool process();
-	    void setState(FRLValidatorState *state);
+	    void setState(std::unique_ptr<FRLValidatorState> st);
 
 	private:
 	    int line;
 	    std::ifstream  &ifs;
 	    std::string tag;
 	    std::stack<std::pair<std::string,int>> tags;
-	    FRLValidatorState *state;
+	    std::unique_ptr<FRLValidatorState> state;
 
 };
 

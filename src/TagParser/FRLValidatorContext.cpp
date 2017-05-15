@@ -3,13 +3,11 @@
 FRLValidatorContext::FRLValidatorContext(std::ifstream *in) : ifs(*in) {
 
 	line = 1;
-	state = NULL;
 
 }
 
 FRLValidatorContext::~FRLValidatorContext() {
 
-	delete state;
 
 }
 
@@ -83,7 +81,8 @@ bool FRLValidatorContext::process() {
 	return state->process(*this);
 }
 
-void FRLValidatorContext::setState(FRLValidatorState *st) {
-	delete state;
-	state = st;
+void FRLValidatorContext::setState(std::unique_ptr<FRLValidatorState> st) {
+	
+	state = std::move(st);
+	
 }
