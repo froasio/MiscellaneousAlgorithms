@@ -44,3 +44,34 @@ void LinearSorting::counting(string &s) {
 			s[z++] = (char)i;
 
 }
+
+void LinearSorting::dnfSort(vector<int> &v) {
+	/*
+		Lo := 1; Mid := 1; Hi := N;
+		while Mid <= Hi do
+			Invariant: a[1..Lo-1]=0 and a[Lo..Mid-1]=1 and a[Hi+1..N]=2; a[Mid..Hi] are unknown.
+			case a[Mid] in
+			0: swap a[Lo] and a[Mid]; Lo++; Mid++
+			1: Mid++
+			2: swap a[Mid] and a[Hi]; Hi--
+	*/
+
+	size_t low, mid, high;
+
+	low = 0;
+	mid = 0;
+	high = v.size() - 1;
+
+	while( mid <= high ) {
+
+		if( v[mid] == 0 )
+			swap(v[low++], v[mid++]);
+
+		else if ( v[mid] == 1 )
+			mid++;
+		
+		else 
+			swap(v[high--], v[mid]);
+
+	}
+}

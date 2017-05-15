@@ -16,6 +16,7 @@ class LinearSorting
 
         void counting(vector<int> &v);
         void counting(string &s);
+        void dnfSort(vector<int> &v);
         
 };
 

@@ -39,3 +39,18 @@ TEST(linearSortingTest, countingSortStringTest)
     CHECK(unsorted_string == sorted_string); 
 
 }
+
+TEST(linearSortingTest, dnfTest)
+{
+    LinearSorting ls;
+    int unsorted_array[7] = {1, 2, 1, 0, 1, 0, 2};
+    int sorted_array[7] = {0, 0, 1, 1, 1, 2, 2};
+    
+    std::vector<int> unsorted_vector(unsorted_array, unsorted_array + (sizeof unsorted_array / sizeof unsorted_array[0]));
+    ls.dnfSort(unsorted_vector);
+     
+    for (int i = 0; i < 7; i++)
+    {
+        CHECK(sorted_array[i] == unsorted_vector[i]);
+    }
+}
