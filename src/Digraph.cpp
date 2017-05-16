@@ -1,12 +1,16 @@
 #include "Digraph.h"
+#include <sstream>
 
 Digraph::Digraph(int vv) : v(vv), e(0), adj_e(vv), inc_e(vv) {
 
 }
 
 Digraph::Digraph(ifstream &ifs) {
-	int vv, ee, src, dst;
+	string line;
+	int src, dst;
 	double weight;
+
+	int vv, ee;
 	ifs >> vv >> ee;
 
 	this->v = vv;
@@ -14,8 +18,19 @@ Digraph::Digraph(ifstream &ifs) {
 	this->adj_e.resize(vv);
 	this->inc_e.resize(vv);
 
+	std::getline(ifs, line);
+
 	for(int ei = 0; ei < ee; ei++){
-		ifs >> src >> dst >> weight;
+
+		std::getline(ifs, line);
+		std::istringstream linestream(line);
+		linestream >> src >> dst;
+		
+		/*Allows to read graph weighted graphs*/
+		weight = 0;
+		if(linestream)
+			linestream >> weight;
+		
 		this->addEdge(src, dst, weight);
 	}
 
