@@ -6,14 +6,32 @@
 #include <string>
 #include <fstream>
 #include <functional>
-#include "Digraph.h"
 #include "Edge.h"
 
 using namespace std;
 
-class Graph : public Digraph {
+class Graph
+{
     public:
-        void addEdge(int s, int d, double w);
+        Graph(int vv);
+        Graph(ifstream &ifs);
+        ~Graph();
+        Graph() = delete;
+        int V();
+        int E();
+        virtual void addEdge(int s, int d, double w);
+        void addEdge(Edge edge);
+        void iterEdges(function<void(Edge&)> f);
+        void adj(int u, function<void(Edge&)> f);
+        void adjE(int u, function<void(Edge&)> f);
+        void iter(function<void(int)> f);
+        string toString();
+
+    protected:
+
+	    int v;
+	    int e;
+	    vector<list<Edge>> adj_e;
 
 };
 

@@ -19,7 +19,7 @@ class Digraph
         Digraph() = delete;
         int V();
         int E();
-        void addEdge(int s, int d, double w);
+        virtual void addEdge(int s, int d, double w);
         void addEdge(Edge edge);
         void iterEdges(function<void(Edge&)> f);
         void adj(int u, function<void(Edge&)> f);
@@ -27,7 +27,7 @@ class Digraph
         void iter(function<void(int)> f);
         string toString();
 
-    private:
+    protected:
 
 	    int v;
 	    int e;
